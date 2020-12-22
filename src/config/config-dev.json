@@ -1,0 +1,40 @@
+{
+  "APPS":"MQTT SERVER PROJECT BACKEND",
+  "MQTT_SERVER":{
+    "host":"mqtt://103.130.129.123",
+    "port":1883,
+    "username":"firmanhidayat",
+    "password":"cianjurkotaku"
+  },
+  "DATABASE":{
+    "HOST": "10.64.7.142",
+    "PORT": 5678,
+    "DB_NAME": "fms",
+    "USERNAME": "fms_admin",
+    "PASSWORD": "P@ssw0rd.fms.@dm!n"
+  },
+  "TOPIC":[
+    "Voltage_A", "Voltage_B", "Voltage_C", "Voltage_LL_Avg",
+    "Voltage_AN", "Voltage_BN", "Voltage_CN", "Voltage_LN_Avg",
+    "Voltage_UnbalanceAB", "Voltage_UnbalanceBC", "Voltage_UnbalanceCA", "Voltage_UnbalanceLLWorst",
+    "Voltage_UnbalanceAN", "Voltage_UnbalanceBN", "Voltage_UnbalanceCN", "Voltage_UnbalanceLNWorst",
+    "THDVoltageAB", "THDVoltageBC", "THDVoltageCA", "THDVoltageLL",
+    "THDVoltageAN", "THDVoltageBN", "THDVoltageCN", "THDVoltageLN",
+
+    
+    "Current_A", "Current_B", "Current_C", "Current_Avg",
+    "THDCurrentA", "THDCurrentB", "THDCurrentC", "THDCurrentN", "THDCurrentG",
+    "MaxCurrentAvg", "MaxCurrentAvgOccurrenceDate",
+
+    "Active_Power_A", "Active_Power_B", "Active_Power_C", "Active_Power_Total",
+    "Reactive_Power_A", "Reactive_Power_B", "Reactive_Power_C", "Reactive_Power_Total",
+    "Apparent_Power_A", "Apparent_Power_B", "Apparent_Power_C", "Apparent_Power_Total",
+    "Power_Factor_A", "Power_Factor_B", "Power_Factor_C", "Power_Factor_Total",
+    "Displacement_Power_Factor_A", "Displacement_Power_Factor_B", "Displacement_Power_Factor_C", "Displacement_Power_Factor_Total",
+    "Power_Factor_Total_Alt1", "Power_Factor_Total_Alt2", "Power_Factor_Total_Alt3", "Power_Factor_Total_Alt4",
+
+    "ActiveEnergyDelivered", "ActiveEnergyReceived", "ActiveEnergyDeliveredReceived", "ActiveEnergyDeliveredMinusReceived",
+    "ReactiveEnergyDelivered", "ReactiveEnergyReceived", "ReactiveEnergyDeliveredReceived", "ReactiveEnergyDeliveredMinusReceived",
+    "ApparentEnergyDelivered", "ApparentEnergyReceived", "ApparentEnergyDeliveredReceived", "ApparentEnergyDeliveredMinusReceived"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "power-meter-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Power Meter Dashboard client using React, Nivo, and Webpack",
+  "scripts": {
+    "start": "node entrypoint.js",
+    "dev": "nodemon entrypoint.js",
+    "lint": "eslint --fix src/",
+    "clean": "rm -rf package-lock.json && rm -rf node_modules/ && npm i",
+    "build": "rm -rf build && babel src -d build && cp -Rf src/config/. build/config/",
+    "build:start": "node build/index.js",
+    "simulate:prod": "npm run build && npm run build:start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alditiadika/power-meter-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alditiadika/power-meter-client/issues"
+  },
+  "homepage": "https://github.com/alditiadika/power-meter-client#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mqtt": "^4.2.6",
+    "pg": "^8.5.1",
+    "socket.io": "^3.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
+    "@babel/plugin-transform-async-to-generator": "^7.10.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/plugin-transform-regenerator": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
+    "nodemon": "^2.0.4",
+    "eslint": "^7.1.0"
+  }
+}
