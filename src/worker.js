@@ -13,8 +13,9 @@ const worker = async socket => {
     })
     client.on('message', async (topic, message) => {
       const value = isNaN(parseInt(message.toString())) ? null: message.toString()
+      const createdDate = moment().local().format('YYYY-MM-DD HH:mm:ss')
+      const messageReturn = { topic, message:value, created_date:createdDate }
       if(value !== null) {
-        const messageReturn = { topic, message:value }
         socket.emit('notification', messageReturn)
         try {
           const [, , sensor] = topic.split('/')
@@ -23,7 +24,7 @@ const worker = async socket => {
           await client.query(`
           insert into ${tableName} 
             ("sensor", "topic", "value", "created_date") values 
-            ('${sensor}', '${topic}', ${value}, '${moment().local().format('YYYY-MM-DD HH:mm:ss')}')
+            ('${sensor}', '${topic}', ${value}, '${createdDate}')
             `)
           client.release()
         } catch(e) {

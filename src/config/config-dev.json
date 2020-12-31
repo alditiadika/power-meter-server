@@ -7,11 +7,11 @@
     "password":"cianjurkotaku"
   },
   "DATABASE":{
-    "HOST": "10.64.7.142",
-    "PORT": 5678,
-    "DB_NAME": "fms",
-    "USERNAME": "fms_admin",
-    "PASSWORD": "P@ssw0rd.fms.@dm!n"
+    "HOST": "103.130.129.123",
+    "PORT": 5432,
+    "DB_NAME": "power_meter_db",
+    "USERNAME": "admin",
+    "PASSWORD": "P@ssw0rd"
   },
   "TOPIC":[
     "Voltage_A", "Voltage_B", "Voltage_C", "Voltage_LL_Avg",

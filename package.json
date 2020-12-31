@@ -4,13 +4,14 @@
   "main": "index.js",
   "description": "Power Meter Dashboard client using React, Nivo, and Webpack",
   "scripts": {
-    "start": "node entrypoint.js",
+    "start": "node build/index.js",
     "dev": "nodemon entrypoint.js",
     "lint": "eslint --fix src/",
     "clean": "rm -rf package-lock.json && rm -rf node_modules/ && npm i",
-    "build": "rm -rf build && babel src -d build && cp -Rf src/config/. build/config/",
+    "build": "npm run copy:config:dev && rm -rf build && babel src -d build && cp -Rf src/config/. build/config/",
     "build:start": "node build/index.js",
-    "simulate:prod": "npm run build && npm run build:start"
+    "simulate:prod": "npm run build && npm run build:start",
+    "copy:config:dev": "cp -f src/config/config-dev.json src/config/config.json"
   },
   "repository": {
     "type": "git",
