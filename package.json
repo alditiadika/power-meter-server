@@ -2,7 +2,7 @@
   "name": "power-meter-server",
   "version": "1.0.0",
   "main": "index.js",
-  "description": "Power Meter Dashboard client using React, Nivo, and Webpack",
+  "description": "Power Meter Dashboard server using NodeJS",
   "scripts": {
     "start": "node build/index.js",
     "dev": "nodemon entrypoint.js",
@@ -15,24 +15,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alditiadika/power-meter-client.git"
+    "url": "git+https://github.com/alditiadika/power-meter-server.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alditiadika/power-meter-client/issues"
+    "url": "https://github.com/alditiadika/power-meter-server/issues"
   },
-  "homepage": "https://github.com/alditiadika/power-meter-client#readme",
+  "homepage": "https://github.com/alditiadika/power-meter-service#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mqtt": "^4.2.6",
     "pg": "^8.5.1",
-    "socket.io": "^3.0.3"
-  },
-  "devDependencies": {
+    "socket.io": "^3.0.3",
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
@@ -42,7 +40,9 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
-    "@babel/register": "^7.10.1",
+    "@babel/register": "^7.10.1"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.4",
     "eslint": "^7.1.0"
   }
