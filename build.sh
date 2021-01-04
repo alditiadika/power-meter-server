@@ -1,0 +1,1 @@
+sudo docker build --build-arg SERVER_ENV=dev -t power-meter-server .

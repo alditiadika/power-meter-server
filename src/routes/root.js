@@ -11,13 +11,13 @@ const rootRouter = async (req, res) => {
   if(!checkInvalidParameter(topic) && !checkInvalidParameter(sensor)) {
     const client = await pool.connect()
     const tableName = getTableName(topic)
-    const lastSeenTime = moment().local().add(-23, 'hour').format('YYYY-MM-DD HH:mm:ss')
+    // const lastSeenTime = moment().local().add(-23, 'hour').format('YYYY-MM-DD HH:mm:ss')
     if(tableName) {
       const query = `
         select 
         distinct on (minute_created) minute_created, ${fields} 
         from v_${tableName} md 
-        where "topic" = '${exactTopic}' and sensor = '${sensor}' and created_date >= '${lastSeenTime}' order by "minute_created" desc limit 100
+        where "topic" = '${exactTopic}' and sensor = '${sensor}' order by "minute_created" desc limit 100
       `
       const { rows } = await client.query(query)
       const message = rows.sort((a, b) => moment(a.minute_created) < moment(b.minute_created) ? -1: 1)

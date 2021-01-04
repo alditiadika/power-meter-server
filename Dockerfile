@@ -1,4 +1,4 @@
-FROM node:10.11-alpine as builder
+FROM node:12.20-alpine as builder
 ARG SERVER_ENV=''
 RUN apk add --update \
     python \
@@ -17,10 +17,9 @@ RUN npm run lint
 RUN npm run build
 
 #Distribution
-FROM node:10.11-alpine
+FROM node:12.20-alpine
 COPY --from=builder build build
 COPY --from=builder package.json package.json
 COPY --from=builder node_modules node_modules
-RUN mkdir build/attachment-file
-CMD ["npm", "run", "build:start"]
-EXPOSE 8000
+CMD ["npm", "run", "start"]
+EXPOSE 8080
