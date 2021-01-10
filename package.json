@@ -8,7 +8,7 @@
     "dev": "nodemon entrypoint.js",
     "lint": "eslint --fix src/",
     "clean": "rm -rf package-lock.json && rm -rf node_modules/ && npm i",
-    "build": "npm run copy:config:dev && rm -rf build && babel src -d build && cp -Rf src/config/. build/config/",
+    "build": "rm -rf build && babel src -d build && cp -Rf src/config/. build/config/",
     "build:start": "node build/index.js",
     "simulate:prod": "npm run build && npm run build:start",
     "copy:config:dev": "cp -f src/config/config-dev.json src/config/config.json"
