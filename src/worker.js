@@ -13,7 +13,7 @@ const worker = async socket => {
     })
     client.on('message', async (topic, message) => {
       const value = isNaN(parseInt(message.toString())) ? null: message.toString()
-      const createdDate = moment().local().format('YYYY-MM-DD HH:mm:ss')
+      const createdDate = moment().format()
       const messageReturn = { topic, message:value, created_date:createdDate }
       if(value !== null) {
         socket.emit('notification', messageReturn)
