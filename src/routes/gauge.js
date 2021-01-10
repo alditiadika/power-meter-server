@@ -12,50 +12,55 @@ const gaugeRouter = async (req, res) => {
     energy:`home/sensors/${sensor}/ActiveEnergyDelivered`
   }
   if(!checkInvalidParameter(sensor)) {
-    const client = await pool.connect()
-    const queryVoltage = `
-      select ${fields} 
-      from v_voltage_data md 
-      where "topic" = '${topic.voltage}' and sensor = '${sensor}' order by "minute_created" desc limit 1
-    `
-    const queryCurrent = `
-      select ${fields} 
-      from v_current_data md 
-      where "topic" = '${topic.current}' and sensor = '${sensor}' order by "minute_created" desc limit 1
-    `
-    const queryPower = `
-      select ${fields} 
-      from v_power_data md 
-      where "topic" = '${topic.power}' and sensor = '${sensor}' order by "minute_created" desc limit 1
-    `
-    const queryPowerFactor = `
-      select ${fields} 
-      from v_power_data md 
-      where "topic" = '${topic.power}' and sensor = '${sensor}' order by "minute_created" desc limit 1
-    `
-    const queryEnergy = `
-      select ${fields} 
-      from v_energy_data md 
-      where "topic" = '${topic.energy}' and sensor = '${sensor}' order by "minute_created" desc limit 1
-    `
-    const [voltageData] = (await client.query(queryVoltage)).rows
-    const [currentData] = (await client.query(queryCurrent)).rows
-    const [powerData] = (await client.query(queryPower)).rows
-    const [powerFactorData] = (await client.query(queryPowerFactor)).rows
-    const [energyData] = (await client.query(queryEnergy)).rows
-    
-    const message = {
-      voltage:voltageData ? voltageData.value: null,
-      current:currentData ? currentData.value: null,
-      power:powerData ? powerData.value: null,
-      power_factor:powerFactorData ? powerFactorData.value: null,
-      energy: energyData ? energyData.value:null
+    try {
+      const client = await pool.connect()
+      const queryVoltage = `
+        select ${fields} 
+        from v_voltage_data md 
+        where "topic" = '${topic.voltage}' and sensor = '${sensor}' order by "minute_created" desc limit 1
+      `
+      const queryCurrent = `
+        select ${fields} 
+        from v_current_data md 
+        where "topic" = '${topic.current}' and sensor = '${sensor}' order by "minute_created" desc limit 1
+      `
+      const queryPower = `
+        select ${fields} 
+        from v_power_data md 
+        where "topic" = '${topic.power}' and sensor = '${sensor}' order by "minute_created" desc limit 1
+      `
+      const queryPowerFactor = `
+        select ${fields} 
+        from v_power_data md 
+        where "topic" = '${topic.power}' and sensor = '${sensor}' order by "minute_created" desc limit 1
+      `
+      const queryEnergy = `
+        select ${fields} 
+        from v_energy_data md 
+        where "topic" = '${topic.energy}' and sensor = '${sensor}' order by "minute_created" desc limit 1
+      `
+      const [voltageData] = (await client.query(queryVoltage)).rows
+      const [currentData] = (await client.query(queryCurrent)).rows
+      const [powerData] = (await client.query(queryPower)).rows
+      const [powerFactorData] = (await client.query(queryPowerFactor)).rows
+      const [energyData] = (await client.query(queryEnergy)).rows
+      
+      const message = {
+        voltage:voltageData ? voltageData.value: null,
+        current:currentData ? currentData.value: null,
+        power:powerData ? powerData.value: null,
+        power_factor:powerFactorData ? powerFactorData.value: null,
+        energy: energyData ? energyData.value:null
+      }
+      const dataSend = { status:200, message }
+      res.send(dataSend)
+      client.release()
+    } catch(e) {
+      console.log(e)
+      res.status(500).send({ status:500, message:e.toString() })
     }
-    const dataSend = { status:200, message }
-    res.send(dataSend)
-    client.release()
   } else {
-    res.send({ status:500, message:'invalid sensor' })
+    res.status(404).send({ status:404, message:'invalid sensor' })
   }
 }
 export default gaugeRouter
