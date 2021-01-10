@@ -8,9 +8,9 @@
   },
   "DATABASE":{
     "HOST": "103.130.129.123",
-    "PORT": 5430,
-    "DB_NAME": "power_meter_db",
-    "USERNAME": "admin",
+    "PORT": 5432,
+    "DB_NAME": "power_meter",
+    "USERNAME": "power_meter_adm",
     "PASSWORD": "P@ssw0rd"
   },
   "TOPIC":[

@@ -7,9 +7,9 @@ import { getTableName } from './utils/get-table-name'
 const worker = async socket => {
   const { is_connected, client } = await mqttConnector()
   if(is_connected) {
-    TOPIC.forEach(async item => {
-      const mainPath = 'home/sensors/gateway_1'
-      await mqttSub({ client, topic:`${mainPath}/${item}` })
+    const topics = listTopic()
+    topics.forEach(async item => {
+      await mqttSub({ client, topic:`${item}` })
     })
     client.on('message', async (topic, message) => {
       const value = isNaN(parseInt(message.toString())) ? null: message.toString()
@@ -35,3 +35,14 @@ const worker = async socket => {
   } else console.log('cannot connect to mqtt server')
 }
 export default worker
+const listTopic = () => {
+  let arr = []
+  const gateways = new Array(16).fill(0).map((_, index) => `gateway_${index + 1}`)
+  gateways.forEach(gateway => {
+    TOPIC.forEach(item => {
+      const path = `home/sensors/${gateway}/${item}`
+      arr.push(path)
+    })
+  })
+  return arr
+}
