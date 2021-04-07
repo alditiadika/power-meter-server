@@ -12,12 +12,13 @@ const rootRouter = async (req, res) => {
     try {
       const client = await pool.connect()
       const tableName = getTableName(topic)
+      
       if(tableName) {
         const query = `
           select 
           distinct on (minute_created) minute_created, ${fields} 
           from v_${tableName} md 
-          where "topic" = '${exactTopic}' and sensor = '${sensor}' order by "minute_created" desc limit 100
+          where "topic" = '${exactTopic}' and sensor = '${sensor}' and created_date >= '${moment().format('YYYY-MM-DD')}' order by "minute_created" desc
         `
         const { rows } = await client.query(query)
         const message = rows.sort((a, b) => moment(a.minute_created) < moment(b.minute_created) ? -1: 1)

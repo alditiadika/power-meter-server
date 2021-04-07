@@ -1,25 +1,13 @@
-FROM node:12.20-alpine as builder
+FROM node:12.20-alpine
 ARG SERVER_ENV=''
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base \
-  && pip install virtualenv \
-  && rm -rf /var/cache/apk/*
 
 COPY . .
-RUN rm -rf src/config/config.json
-RUN cp -f src/config/config-$SERVER_ENV.json src/config/config.json
-RUN cat src/config/config.json
-RUN npm install
-RUN npm run lint
-RUN npm run build
+RUN rm -rf src/config/config.json && \
+  cp -f src/config/config-$SERVER_ENV.json src/config/config.json && \
+  cat src/config/config.json && \
+  npm install && \
+  npm run lint && \
+  npm run build
 
-#Distribution
-FROM node:12.20-alpine
-COPY --from=builder build build
-COPY --from=builder package.json package.json
-COPY --from=builder node_modules node_modules
 CMD ["npm", "run", "start"]
 EXPOSE 8080

@@ -1,15 +1,15 @@
 {
   "APPS":"MQTT SERVER PROJECT BACKEND",
   "MQTT_SERVER":{
-    "host":"mqtt://10.68.11.72",
+    "host":"mqtt://localhost",
     "port":1883,
-    "username":"root",
-    "password":"flat2021"
+    "username":"",
+    "password":""
   },
   "DATABASE":{
-    "HOST": "103.130.129.123",
-    "PORT": 5430,
-    "DB_NAME": "power_meter_db",
+    "HOST": "localhost",
+    "PORT": 5432,
+    "DB_NAME": "mqtt_db",
     "USERNAME": "admin",
     "PASSWORD": "P@ssw0rd"
   },

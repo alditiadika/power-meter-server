@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 
 import express from 'express'
+import { urlencoded, json } from 'body-parser'
 import cors from 'cors'
 import { createServer } from 'http'
 import socketIO from 'socket.io'
@@ -9,6 +10,8 @@ import setRouters from './routes'
 
 const app = express()
 app.use(cors())
+app.use(urlencoded({ extended:true }))
+app.use(json())
 const serverHTTP = createServer(app)
 const socket = socketIO(serverHTTP, {
   cors: {
